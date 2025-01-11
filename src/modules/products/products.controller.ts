@@ -12,7 +12,7 @@ export class ProductsController {
     ) {
         try {
             const imagesDir = path.resolve(__dirname, '../../../src/images');
-            const baseUrl = 'http://localhost:3000/images';
+            const baseUrl = 'https://free-api-food-ecommerce.vercel.app/images';
 
             const files = fs.readdirSync(imagesDir).filter((file) => file.endsWith('.png'));
 
