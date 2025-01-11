@@ -1,7 +1,7 @@
 import { Controller, Get, HttpStatus, Query } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
-import { ifoodItems } from 'src/foods';
+import { ifoodItems } from '../../foods';
 
 @Controller('Product')
 export class ProductsController {
