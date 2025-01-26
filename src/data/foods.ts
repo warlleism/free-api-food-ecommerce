@@ -359,4 +359,54 @@ export const ifoodItems = [
         category: "Sobremesa",
         discount: 15
     },
+    {
+        id: 37,
+        title: "Balde 10 tiras",
+        img: "37.png",
+        enterprise: "KFC",
+        description: "Balde com 10 tiras de frango enpanado.",
+        price: 20.90,
+        category: "Salgado",
+        discount: 15
+    },
+    {
+        id: 38,
+        title: "Chicken Nuggets",
+        img: "38.png",
+        enterprise: "KFC",
+        description: "Nuggets de frango enpanado com molho especial.",
+        price: 13.90,
+        category: "Salgado",
+        discount: 0
+    },
+    {
+        id: 39,
+        title: "Caixa de snackers + Pepsi",
+        img: "39.png",
+        enterprise: "KFC",
+        description: "Caixa de frango enpanado + batata e mostada + Pepsi.",
+        price: 10.50,
+        category: "Salgado",
+        discount: 15
+    },
+    {
+        id: 40,
+        title: "Batatas fritas",
+        img: "40.png",
+        enterprise: "KFC",
+        description: "Batatas fritas KFC.",
+        price: 13.90,
+        category: "Salgado",
+        discount: 15
+    },
+    {
+        id: 41,
+        title: "Combo KFC de chicken nuggets",
+        img: "41.png",
+        enterprise: "KFC",
+        description: "Combo de nuggets de frango enpanado.",
+        price: 25.90,
+        category: "Salgado",
+        discount: 0
+    },
 ];

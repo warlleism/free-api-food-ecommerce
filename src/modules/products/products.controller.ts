@@ -7,7 +7,7 @@ export class ProductsController {
     @Get('products')
     async getImages(
         @Query('page') page: number = 1,
-        @Query('pagesize') pageSize: number = 36,
+        @Query('pagesize') pagesize: number = 41,
     ) {
         try {
             const baseUrl = 'https://carolinaiv.vercel.app/images';
@@ -23,17 +23,25 @@ export class ProductsController {
                 description: item.description,
             }));
 
-            const totalItems = food.length;
-            const totalPages = Math.ceil(totalItems / pageSize);
+            // Convert page and pagesize to numbers to ensure proper calculation
+            const pageNum = Number(page);
+            const pageSizeNum = Number(pagesize);
 
-            const startIndex = (page - 1) * pageSize;
-            const paginatedFood = food.slice(startIndex, startIndex + pageSize);
+            const totalItems = food.length;
+            const totalPages = Math.ceil(totalItems / pageSizeNum);
+
+            // Calculate start index based on page number and page size
+            const startIndex = (pageNum - 1) * pageSizeNum;
+            const endIndex = startIndex + pageSizeNum;
+            const paginatedFood = food.slice(startIndex, endIndex);
 
             return {
                 message: 'Images fetched successfully',
                 products: paginatedFood,
-                currentPage: page,
+                currentPage: pageNum,
                 totalPages: totalPages,
+                itemsPerPage: pageSizeNum,
+                totalItems: totalItems,
                 status: HttpStatus.OK,
             };
         } catch (error) {
@@ -49,7 +57,7 @@ export class ProductsController {
     async getOneProduct(
         @Query('title') title: string,
         @Query('page') page: number = 1,
-        @Query('pagesize') pageSize: number = 5,
+        @Query('pagesize') pagesize: number = 5,
     ) {
         try {
             const baseUrl = 'https://carolinaiv.vercel.app/images';
@@ -67,17 +75,23 @@ export class ProductsController {
 
             const filteredProducts = food.filter(item => item.title.replace(/[^\w]/g, '').replace(/_/g, '').toLowerCase().includes(title.replace(/[^\w]/g, '').replace(/_/g, '').toLowerCase()));
 
+            const pageNum = Number(page);
+            const pageSizeNum = Number(pagesize);
+            
             const totalItems = filteredProducts.length;
-            const totalPages = Math.ceil(totalItems / pageSize);
+            const totalPages = Math.ceil(totalItems / pageSizeNum);
 
-            const startIndex = (page - 1) * pageSize;
-            const paginatedFood = filteredProducts.slice(startIndex, startIndex + pageSize);
+            const startIndex = (pageNum - 1) * pageSizeNum;
+            const endIndex = startIndex + pageSizeNum;
+            const paginatedFood = filteredProducts.slice(startIndex, endIndex);
 
             return {
                 message: 'Product fetched successfully',
                 products: paginatedFood,
-                currentPage: page,
+                currentPage: pageNum,
                 totalPages: totalPages,
+                itemsPerPage: pageSizeNum,
+                totalItems: totalItems,
                 status: HttpStatus.OK,
             };
         } catch (error) {
@@ -93,7 +107,7 @@ export class ProductsController {
     async getCategory(
         @Query('category') category: string,
         @Query('page') page: number = 1,
-        @Query('pagesize') pageSize: number = 5,
+        @Query('pagesize') pagesize: number = 5,
     ) {
         try {
             const baseUrl = 'https://carolinaiv.vercel.app/images';
@@ -111,17 +125,23 @@ export class ProductsController {
 
             const filteredProducts = food.filter(item => item.category.normalize('NFD').replace(/[\u0300-\u036f\s]/g, '').toLowerCase() === category.normalize('NFD').replace(/[\u0300-\u036f\s]/g, '').toLowerCase());
 
-            const totalItems = filteredProducts.length;
-            const totalPages = Math.ceil(totalItems / pageSize);
+            const pageNum = Number(page);
+            const pageSizeNum = Number(pagesize);
 
-            const startIndex = (page - 1) * pageSize;
-            const paginatedFood = filteredProducts.slice(startIndex, startIndex + pageSize);
+            const totalItems = filteredProducts.length;
+            const totalPages = Math.ceil(totalItems / pageSizeNum);
+
+            const startIndex = (pageNum - 1) * pageSizeNum;
+            const endIndex = startIndex + pageSizeNum;
+            const paginatedFood = filteredProducts.slice(startIndex, endIndex);
 
             return {
                 message: 'Product fetched successfully',
                 products: paginatedFood,
-                currentPage: page,
+                currentPage: pageNum,
                 totalPages: totalPages,
+                itemsPerPage: pageSizeNum,
+                totalItems: totalItems,
                 status: HttpStatus.OK,
             };
         } catch (error) {
@@ -137,7 +157,7 @@ export class ProductsController {
     async getEnterprise(
         @Query('enterprise') enterprise: string,
         @Query('page') page: number = 1,
-        @Query('pagesize') pageSize: number = 5,
+        @Query('pagesize') pagesize: number = 5,
     ) {
         try {
             const baseUrl = 'https://carolinaiv.vercel.app/images';
@@ -153,20 +173,25 @@ export class ProductsController {
                 description: item.description,
             }));
 
-
             const filteredProducts = food.filter(item => item.enterprise.replace(/[^\w]/g, '').replace(/_/g, '').toLowerCase() === enterprise.replace(/[^\w]/g, '').replace(/_/g, '').toLowerCase());
 
-            const totalItems = filteredProducts.length;
-            const totalPages = Math.ceil(totalItems / pageSize);
+            const pageNum = Number(page);
+            const pageSizeNum = Number(pagesize);
 
-            const startIndex = (page - 1) * pageSize;
-            const paginatedFood = filteredProducts.slice(startIndex, startIndex + pageSize);
+            const totalItems = filteredProducts.length;
+            const totalPages = Math.ceil(totalItems / pageSizeNum);
+
+            const startIndex = (pageNum - 1) * pageSizeNum;
+            const endIndex = startIndex + pageSizeNum;
+            const paginatedFood = filteredProducts.slice(startIndex, endIndex);
 
             return {
                 message: 'Product fetched successfully',
                 products: paginatedFood,
-                currentPage: page,
+                currentPage: pageNum,
                 totalPages: totalPages,
+                itemsPerPage: pageSizeNum,
+                totalItems: totalItems,
                 status: HttpStatus.OK,
             };
         } catch (error) {
@@ -193,7 +218,6 @@ export class ProductsController {
                 enterprise: item.enterprise,
                 description: item.description,
             }));
-
 
             const filteredProducts = [];
             const includedIndices = new Set();
